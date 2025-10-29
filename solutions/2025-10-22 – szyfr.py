@@ -13,25 +13,40 @@ def odszyfruj(wejscie: str) -> str:
     tablica = robienie_macierzy(zaszyfrowana_wiadomosc, szerokosc)
     odszyfrowana_wiadomosc = ""
     pozycje = (pozycje).split(" ")
+    szablon = robienie_szablonu(pozycje, int(szerokosc))
     for _ in range(4):
-        for i in range(len(pozycje)):
-            odszyfrowana_wiadomosc += podaj_litere(int(pozycje[i]), tablica)
-        tablica = obracanie(tablica)
-    return odszyfrowana_wiadomosc
+        odszyfrowana_wiadomosc = przykladanie_szablonu(
+            szablon, tablica, odszyfrowana_wiadomosc
+        )
+        szablon = obracanie(szablon)
+    print(odszyfrowana_wiadomosc)
+    return odszyfrowana_wiadomosc.split(".")[0]
 
 
-def robienie_szablonu(pozycje: list, szerokosc: int) -> list[list[bool]]:
+def robienie_szablonu(pozycje: list[str], szerokosc: int) -> list[list[bool]]:
     szablon = [[False for _ in range(szerokosc)] for _ in range(szerokosc)]
     for i in range(len(pozycje)):
-        szukana_pozycja = pozycje[i] - 1
+        szukana_pozycja = int(pozycje[i]) - 1
         wiersz = szukana_pozycja // szerokosc
         kolumna = szukana_pozycja % szerokosc
         szablon[wiersz][kolumna] = True
     return szablon
 
 
-def przykladanie_szablonu(szablon, tablica) -> str:
-    pass
+def przykladanie_szablonu(szablon, tablica, odszyfrowana_wiadomosc) -> str:
+    for i in range(len(tablica)):
+        for j in range(len(tablica)):
+            if szablon[i][j] == True:
+                odszyfrowana_wiadomosc += tablica[i][j]
+    return odszyfrowana_wiadomosc
+
+
+def obracanie_szablonu(szablon):
+    obrucony_szablon = [[[] for _ in range(len(szablon))] for _ in range(len(szablon))]
+    for i in range(len(szablon)):
+        for j in range(len(szablon)):
+            obrucony_szablon[j][len(szablon) - i] = szablon[i][j]
+    return obrucony_szablon
 
 
 def robienie_macierzy(zaszyfrowana_wiadomosc, szerokosc):
@@ -66,7 +81,7 @@ obracanie(robienie_macierzy("cxrizboeaxwkdwaaajwwgnasikzlezoy.afa", 6))
 assert podaj_litere(4, tablica_testowa) == "i"
 assert (
     odszyfruj("6\n1 4 8 12 15 20 23 30 34\ncxrizboeaxwkdwaaajwwgnasikzlezoy.afa")
-    == "ciekawazabawawszyfrowanie.afa"
+    == "ciekawazabawawszyfrowanie"
 )
 assert robienie_macierzy("cxrizboeaxwkdwaaajwwgnasikzlezoy.afa", 6) == tablica_testowa
 
