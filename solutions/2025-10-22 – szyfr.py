@@ -10,16 +10,22 @@ tablica_testowa = [
 
 def odszyfruj(wejscie: str) -> str:
     szerokosc, pozycje, zaszyfrowana_wiadomosc = wejscie.split("\n")
-    tablica = robienie_macierzy(zaszyfrowana_wiadomosc, szerokosc)
+    szerokosc = int(szerokosc)
+    rozmiar_macierzy = szerokosc * szerokosc
+    liczba_tablic = int(len(zaszyfrowana_wiadomosc) // rozmiar_macierzy)
     odszyfrowana_wiadomosc = ""
-    pozycje = (pozycje).split(" ")
-    szablon = robienie_szablonu(pozycje, int(szerokosc))
-    for _ in range(4):
-        odszyfrowana_wiadomosc = przykladanie_szablonu(
-            szablon, tablica, odszyfrowana_wiadomosc
-        )
-        szablon = obracanie(szablon)
-    print(odszyfrowana_wiadomosc)
+    pozycje = pozycje.split(" ")
+    for i in range(liczba_tablic):
+        fragment_szyfrogramu = zaszyfrowana_wiadomosc[
+            i * rozmiar_macierzy : i * rozmiar_macierzy + rozmiar_macierzy
+        ]
+        tablica = robienie_macierzy(fragment_szyfrogramu, szerokosc)
+        szablon = robienie_szablonu(pozycje, szerokosc)
+        for _ in range(4):
+            odszyfrowana_wiadomosc = przykladanie_szablonu(
+                szablon, tablica, odszyfrowana_wiadomosc
+            )
+            szablon = obracanie(szablon)
     return odszyfrowana_wiadomosc.split(".")[0]
 
 
@@ -86,3 +92,15 @@ assert (
 assert robienie_macierzy("cxrizboeaxwkdwaaajwwgnasikzlezoy.afa", 6) == tablica_testowa
 
 assert obracanie([[1, 2], [3, 4]]) == [[3, 1], [4, 2]]
+
+assert (
+    odszyfruj("4\n1 2 11 12\nalaaaiakloamatpsmaztsajaoikovp.f")
+    == "alamakotaipsaalamakotaipsa"
+)
+
+assert (
+    odszyfruj(
+        "12\n1 2 3 4 5 6 13 14 15 16 17 18 25 26 27 28 29 30 37 38 39 40 41 42 49 50 51 52 53 54 61 62 63 64 65 66\ndotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztukadotrzedotrzechrazychrazysztukasztuka.ontcpdotrzeesvnlxchrazygowbkdsztuka"
+    )
+    == "dotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztukadotrzechrazysztuka"
+)
