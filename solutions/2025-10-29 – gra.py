@@ -3,9 +3,10 @@ def gra(wejscie: str) -> str:
     # liczenie przejścia małgosi do jasia
     # odwrócić połowę ścieżki
     # wypisać wynik
-    malgosia, jas = odwarcanie_polowy_scierzki(scierzka).split()
-    wynik = f"{malgosia}\n{jas}"
-    return wynik
+    # malgosia, jas = odwarcanie_polowy_scierzki(scierzka)
+    # wynik = f"{malgosia}\n{jas}"
+    # return wynik
+    pass
 
 
 def robienie_macierzy(wejscie: str):
@@ -42,14 +43,52 @@ def szukanie_litery(wejscie, szukana_litera):
 
 
 def liczenie(macierz: list[list[str]], wejscie):
-    start = szukanie_litery(wejscie, "M")
+    start_wiersz, start_kolumna = szukanie_litery(wejscie, "M")
     koniec = szukanie_litery(wejscie, "J")
-    pozycja = 0
-    wynik = ""
-    krok = ""
+    pozycja_wiersz = start_wiersz
+    pozycja_kolumna = start_kolumna
+    kroki = ""
+    pozycje = []
+    droga = False
+    mozliwe_ruchy = []
+    while droga == False:
+        pozycje.append((pozycja_wiersz, pozycja_kolumna))
+        if pozycja_wiersz - 1 != -1:
+            if (
+                macierz[pozycja_wiersz - 1][pozycja_kolumna] in ["S", "J"]
+                and (pozycja_wiersz - 1, pozycja_kolumna) not in pozycje
+            ):
+                mozliwe_ruchy.append((pozycja_wiersz - 1, pozycja_kolumna, "G"))
+        if pozycja_kolumna - 1 != -1:
+            if (
+                macierz[pozycja_wiersz][pozycja_kolumna - 1] in ["S", "J"]
+                and (pozycja_wiersz, pozycja_kolumna - 1) not in pozycje
+            ):
+                mozliwe_ruchy.append((pozycja_wiersz, pozycja_kolumna - 1, "L"))
+        if pozycja_kolumna + 1 != len(macierz[0]):
+            if (
+                macierz[pozycja_wiersz][pozycja_kolumna + 1] in ["S", "J"]
+                and (pozycja_wiersz, pozycja_kolumna + 1) not in pozycje
+            ):
+                mozliwe_ruchy.append((pozycja_wiersz, pozycja_kolumna + 1, "P"))
+        if pozycja_wiersz + 1 != len(macierz[0]):
+            if (
+                macierz[pozycja_wiersz + 1][pozycja_kolumna] in ["S", "J"]
+                and (pozycja_wiersz + 1, pozycja_kolumna) not in pozycje
+            ):
+                mozliwe_ruchy.append((pozycja_wiersz + 1, pozycja_kolumna, "D"))
+        if len(mozliwe_ruchy) == 0:
+            return "BRAK"
+        robocza = mozliwe_ruchy.pop()
+        kroki += robocza[2]
+        pozycja_wiersz = robocza[0]
+        pozycja_kolumna = robocza[1]
+        if (pozycja_wiersz, pozycja_kolumna) == koniec:
+            droga = True
+    return kroki
 
 
-assert liczenie(robienie_macierzy("MXSSSXXSSSXSXSSJ"), "MXSSSXXSSSXSXSSJ") == "DDPDP"
+assert liczenie(robienie_macierzy("MXSSSXXSSSXSXSSJ"), "MXSSSXXSSSXSXSSJ") == "DDPDPP"
 
 assert szukanie_litery("MXSXSXXSSSXSXSJX", "M") == (0, 0)
 assert szukanie_litery("MSXJ", "J") == (1, 1)
