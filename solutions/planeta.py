@@ -26,13 +26,6 @@ class Osiedle:
             print(dom.podaj_wspolrzedne())
 
 
-d1 = Dom()
-d1.wsporzedna_x = 15
-d1.wsporzedna_y = 20
-
-assert d1.podaj_wspolrzedne() == [15, 20]
-
-
 def liczenie_odleglosci(d1: Dom, d2: Dom, rozmiar: int):
     odleglosc_x = abs(d1.wsporzedna_x - d2.wsporzedna_x)
     if odleglosc_x > rozmiar / 2:
@@ -40,34 +33,61 @@ def liczenie_odleglosci(d1: Dom, d2: Dom, rozmiar: int):
     odleglosc_y = abs(d1.wsporzedna_y - d2.wsporzedna_y)
     if odleglosc_y > rozmiar / 2:
         odleglosc_y -= rozmiar
-    return odleglosc_x + odleglosc_y
+    return abs(odleglosc_x) + abs(odleglosc_y)
 
 
-def odl(a, b, r):
-    x = abs(a[0] - b[0])
-    if x > r / 2:
-        x = r - x
-    y = abs(a[1] - b[1])
-    if y > r / 2:
-        y = r - y
-    return x + y
-
-
-def osiedle(domy: list[Dom], rozmiar):
-    aktulnie_sprawdzany_dom = domy[0]
+def rozmiar_osiedla(domy: list[Dom], rozmiar, dom_poczatkowy: Dom):
+    aktulnie_sprawdzany_dom = dom_poczatkowy
     sasiadujace_domy = set(sasiedzi(aktulnie_sprawdzany_dom, domy, rozmiar))
+    sprawdzone_domy = []
 
     for aktulnie_sprawdzany_dom in sasiadujace_domy:
-        while len(sasiedzi(aktulnie_sprawdzany_dom, domy, rozmiar)) - 1 > 0:
+        if aktulnie_sprawdzany_dom not in sprawdzone_domy:
+            sprawdzone_domy.append(aktulnie_sprawdzany_dom)
             sasiadujace_domy.union(sasiedzi(aktulnie_sprawdzany_dom, domy, rozmiar))
     return len(sasiadujace_domy)
 
 
-print(odl([1, 4], [8, 9], 10))
+# assert (
+#     rozmiar_osiedla(
+#         [Dom(5, 6), Dom(6, 6), Dom(5, 7), Dom(9, 2), Dom(10, 2)], 10, Dom(6, 6)
+#     )
+#     == 3
+# )
 
 
-def planeta(wejscie):
-    domy = wejscie[1]
+# print(odl([1, 4], [8, 9], 10))
 
 
-# assert planeta(12, [[3,1], [1,1], [1,3], [2,12], [9,5], [8,6]]) == 4
+def planeta(rozmiar_planety: int, lista_wspolrzednych: list[list[int]]):
+    domy = buduj_domy(lista_wspolrzednych)
+    rozmiar_najwiekszego_osiedla = 0
+    for i in range(len(domy)):
+        if (
+            rozmiar_osiedla(domy, rozmiar_planety, domy[i])
+            > rozmiar_najwiekszego_osiedla
+        ):
+            rozmiar_najwiekszego_osiedla = rozmiar_osiedla(
+                domy, rozmiar_planety, domy[i]
+            )
+    return rozmiar_najwiekszego_osiedla
+
+
+def buduj_domy(lista_wspolrzednych: list[list[int]]) -> list[Dom]:
+    domy = []
+    for i in range(len(lista_wspolrzednych)):
+        x = lista_wspolrzednych[i][0]
+        y = lista_wspolrzednych[i][1]
+        domy.append(Dom(x, y))
+    return domy
+
+
+assert planeta(12, [[3, 1], [1, 1], [1, 3], [2, 12], [9, 5], [8, 6]]) == 4
+
+assert liczenie_odleglosci(Dom(3, 1), Dom(8, 5), 12) > 5
+assert liczenie_odleglosci(Dom(1, 1), Dom(8, 5), 12) > 5
+assert liczenie_odleglosci(Dom(3, 3), Dom(8, 5), 12) > 5
+assert liczenie_odleglosci(Dom(2, 12), Dom(8, 5), 12) > 5
+
+
+assert liczenie_odleglosci(Dom(9, 5), Dom(3, 1), 12) > 5
