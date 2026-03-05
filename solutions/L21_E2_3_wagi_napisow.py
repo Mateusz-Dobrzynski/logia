@@ -1,3 +1,5 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L21_e2_zad3.pdf
+
 samogloski = ["a", "e", "i", "o", "u", "y", "ą", "ę"]
 
 
@@ -46,8 +48,6 @@ def uporzadkowane(wejscie):
     wejscie = list(wejscie)
     uporzadkowane_slowa = ""
 
-
-#    for i in range(len(wejscie)):
 
 waga = waga_slowa("ala", ["a", "e", "i", "o", "u", "y", "ą", "ę"])
 

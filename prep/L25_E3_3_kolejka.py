@@ -1,3 +1,5 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L25_e3_zad3.pdf
+
 MAX_QUEUE_LENGTH = 10000
 
 

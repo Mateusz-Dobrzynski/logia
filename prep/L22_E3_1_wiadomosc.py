@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L22_e3_zad1.pdf
+
+
 def decode(text: str) -> str:
     packets = text.split(" ")
     output = ""

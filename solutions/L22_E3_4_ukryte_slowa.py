@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L22_e3_zad4.pdf
+
+
 def znajdz_wyraz(wejscie: str) -> int:
     tabela, slowo = wejscie.split("\n")
     for i in range(len(tabela)):

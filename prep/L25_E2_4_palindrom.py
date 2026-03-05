@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L25_e2_zad4.pdf
+
+
 def palindrome(text: str) -> str:
     palindrome_start = ""
     palindrome_end = ""

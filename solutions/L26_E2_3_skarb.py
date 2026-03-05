@@ -1,4 +1,4 @@
-# 2026-E02
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L26_e2_zad3.pdf
 
 
 komnaty = {

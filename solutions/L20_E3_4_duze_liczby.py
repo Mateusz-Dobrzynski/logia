@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L20_e3_zad4.pdf
+
+
 def liczba(liczba_maksymalna, potega) -> int:
     liczba_szukana = liczba_maksymalna ** (1 / potega) // 1
     return liczba_szukana

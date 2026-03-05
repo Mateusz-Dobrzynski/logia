@@ -1,3 +1,5 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L22_e2_zad3.pdf
+
 from math import *
 
 
@@ -34,6 +36,3 @@ def srednia_dzielnikow(liczba: int) -> float:
 
 def test_liczby():
     assert liczby(40) == "45 49 51 55 65"
-
-
-test_dzielniki()

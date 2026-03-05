@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L22_e3_zad2.pdf
+
+
 def liczenie(liczba_dziesietna):
     if liczba_dziesietna == 0:
         return "0"

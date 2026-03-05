@@ -1,3 +1,5 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L22_e2_zad3.pdf
+
 from math import *
 
 

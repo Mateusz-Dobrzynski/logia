@@ -1,6 +1,5 @@
-# odbicie lustrzane
-# obliczyć przesunięcie z klucza
-# przesunąć odbite litery
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L21_e3_zad3.pdf
+
 from string import ascii_lowercase
 
 

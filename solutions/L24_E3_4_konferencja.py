@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L24_e3_zad4.pdf
+
+
 def prelekcje(czasy_rozpoczecia: str) -> int:
     # zaminiemay casy na min
     # liczymy końce preleckcji

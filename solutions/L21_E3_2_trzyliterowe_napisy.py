@@ -1,16 +1,22 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L21_e3_zad2.pdf
+
 from string import ascii_lowercase
 
 
 def harcerski(wejscie: str) -> str:
-    # znajdujemy słowo w kolejności alfabetycznej
-    # Sprawdzamy jego wagę
-    # dopisujemy lub nie do wyjscia
-    licznik_szukany, mianownik_szukany = wejscie.splitk
+    licznik_szukany, mianownik_szukany = wejscie.split(" ")
+    slowa_spelniajace = []
     for pierwsza_litera in ascii_lowercase:
         for druga_litera in ascii_lowercase:
             for trzecia_lietra in ascii_lowercase:
                 slowo = pierwsza_litera + druga_litera + trzecia_lietra
                 licznik_slowa, mianownik_slowa = liczenie_wagi_slowa(slowo)
+                if czy_rowny(
+                    licznik_slowa, mianownik_slowa, licznik_szukany, mianownik_szukany
+                ):
+                    slowa_spelniajace.append(slowo)
+    wynik = " ".join(slowa_spelniajace)
+    return wynik
 
 
 def liczenie_wagi_litery(litera):
@@ -25,7 +31,8 @@ def liczenie_wagi_litery(litera):
 
 
 assert liczenie_wagi_litery("a") == (1, 1)
-assert liczenie_wagi_litery("n") == (3, 5)
+assert liczenie_wagi_litery("g") == (1, 2)
+assert liczenie_wagi_litery("n") == (3, 3)
 assert liczenie_wagi_litery("u") == (5, 4)
 assert liczenie_wagi_litery("z") == (5, 5)
 
@@ -52,5 +59,19 @@ def dodawanie_ulamkow_zwyklych(
     return licznik1 + licznik2, mianownik1 * mianownik2
 
 
-print(ascii_lowercase)
+def czy_rowny(licznik1, mianownik1, licznik2, mianownik2):
+    if mianownik1 == mianownik2:
+        if licznik1 == licznik2:
+            return True
+        return False
+    licznik1 *= mianownik2
+    licznik2 *= mianownik1
+    if licznik1 == licznik2:
+        return True
+    return False
+
+
+assert czy_rowny(1, 2, 4, 8)
+assert not czy_rowny(1, 5, 3, 7)
+
 assert harcerski("3 3") == "gqq lll qgq qqg qqr qrq rqq vvx vww vxv wvw wwv xvv"

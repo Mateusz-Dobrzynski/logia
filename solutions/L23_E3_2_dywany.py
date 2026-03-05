@@ -1,5 +1,7 @@
-# zamaiana wejscia na macierz
-# zprawdzanie czy dany kwadrat pomijajac ramkę jest otoczony przez pomarańczowe
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L23_e3_zad2.pdf
+
+# zamiana wejscia na macierz
+# sprawdzanie czy dany kwadrat pomijajac ramkę jest otoczony przez pomarańczowe
 # podajemy wynik
 
 

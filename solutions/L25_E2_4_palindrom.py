@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L25_e2_zad4.pdf
+
+
 def palindrom(text: str):
     palindrom = ""
     srodek = ""

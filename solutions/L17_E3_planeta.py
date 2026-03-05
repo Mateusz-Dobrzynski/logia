@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/planeta.pdf
+
+
 class Dom:
     wsporzedna_x: int
     wsporzedna_y: int
@@ -46,17 +49,6 @@ def rozmiar_osiedla(domy: list[Dom], rozmiar, dom_poczatkowy: Dom):
             sprawdzone_domy.append(aktulnie_sprawdzany_dom)
             sasiadujace_domy.union(sasiedzi(aktulnie_sprawdzany_dom, domy, rozmiar))
     return len(sasiadujace_domy)
-
-
-# assert (
-#     rozmiar_osiedla(
-#         [Dom(5, 6), Dom(6, 6), Dom(5, 7), Dom(9, 2), Dom(10, 2)], 10, Dom(6, 6)
-#     )
-#     == 3
-# )
-
-
-# print(odl([1, 4], [8, 9], 10))
 
 
 def planeta(rozmiar_planety: int, lista_wspolrzednych: list[list[int]]):

@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L24_e2_zad4.pdf
+
+
 def sito(gora):
     liczby_zlozone = []
     liczby_pierwsze = []

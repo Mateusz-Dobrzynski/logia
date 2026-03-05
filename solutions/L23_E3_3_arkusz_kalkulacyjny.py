@@ -1,3 +1,5 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/L23_e3_zad3.pdf
+
 from string import ascii_uppercase
 
 

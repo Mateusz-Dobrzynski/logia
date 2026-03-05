@@ -1,3 +1,6 @@
+# https://logia.oeiizk.waw.pl/strony/bankzadan/jaka.pdf
+
+
 def suma_cyfr(liczba: int) -> int:
     liczba = list(str(liczba))
     suma = 0
